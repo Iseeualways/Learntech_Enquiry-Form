@@ -233,7 +233,7 @@
                     var(--blue) 0%,
                     var(--blue-deep) 52%,
                     var(--blue-darker) 100%);
-            box-shadow: 0 28px 60px rgba(39, 72, 150, .28);
+
             animation: slideInFromLeft 1s var(--ease) both;
         }
 
@@ -477,7 +477,7 @@
 
         .stat-item h3 {
             font-size: 1.3rem;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.15;
             letter-spacing: -.03em;
             margin-bottom: .3rem;
@@ -627,6 +627,8 @@
             color: var(--ink);
         }
 
+
+
         .form-header .eyebrow {
             font-size: .82rem;
             font-weight: 400;
@@ -686,8 +688,8 @@
             font-size: .82rem;
             font-weight: 400;
             color: var(--ink);
-            background: #fbfcfe;
-            border: 1.5px solid var(--line);
+            background: #ffffff;
+            border: 1px solid rgb(0, 28, 55);
             border-radius: 12px;
             outline: none;
             transition: border-color .2s, box-shadow .2s, background .2s, transform .2s;
@@ -710,7 +712,7 @@
         textarea:focus {
             border-color: var(--blue);
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(39, 72, 150, .10);
+            box-shadow: 0 1px 0 1px rgba(0, 23, 49, 0.986);
         }
 
         option {
@@ -766,7 +768,7 @@
             display: flex;
             align-items: stretch;
             background: #fbfcfe;
-            border: 1.5px solid var(--line);
+            border: 1px solid rgb(0, 28, 55);
             border-radius: 12px;
             transition: border-color .2s, box-shadow .2s, background .2s;
         }
@@ -1039,8 +1041,7 @@
 
         @media (max-width: 900px) {
 
-            .left-panel .subtext,
-            .left-panel .stats-grid,
+
             .left-panel .how-we-help,
             .left-panel .footer-note {
                 display: none;
@@ -1097,6 +1098,16 @@
 
             .cc-menu {
                 width: min(310px, calc(100vw - 2.5rem));
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 8px;
+                margin-bottom: 0rem;
+            }
+
+            .stat-item h3 {
+                font-size: 20px;
             }
         }
 
