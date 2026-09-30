@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learntech Contact Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600;1,700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://flagcdn.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        :root {
+            --blue: #274896;
+            --blue-deep: #1f3c83;
+            --blue-darker: #19346f;
+            --red: #e93c47;
+            --red-dark: #d93440;
+            --ink: #17264c;
+            --label: #344054;
+            --muted: #667085;
+            --line: #dfe4ee;
+            --ease: cubic-bezier(.16, 1, .3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 32px;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 8% 12%, rgba(39, 72, 150, .12), transparent 30%),
+                radial-gradient(circle at 92% 88%, rgba(233, 60, 71, .10), transparent 28%),
+                #f3f5f9;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1180px;
+            display: grid;
+            grid-template-columns: .9fr 1.35fr;
+        }
+
+        /* ---------- Motion ---------- */
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-70px);
+                opacity: 0;
+            }
+
+            to {
+                transform: none;
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                transform: translateX(70px);
+                opacity: 0;
+            }
+
+            to {
+                transform: none;
+                opacity: 1;
+            }
+        }
+
+        @keyframes riseIn {
+            from {
+                transform: translateY(26px);
+                opacity: 0;
+                filter: blur(6px);
+            }
+
+            to {
+                transform: none;
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                transform: translateY(26px) scale(.93);
+                opacity: 0;
+            }
+
+            to {
+                transform: none;
+                opacity: 1;
+            }
+        }
+
+        @keyframes itemIn {
+            from {
+                transform: translateX(-26px);
+                opacity: 0;
+            }
+
+            to {
+                transform: none;
+                opacity: 1;
+            }
+        }
+
+        @keyframes gradientFlow {
+            to {
+                background-position: 300% 50%;
+            }
+        }
+
+        @keyframes textShimmer {
+            from {
+                background-position: 0% 50%;
+            }
+
+            to {
+                background-position: 200% 50%;
+            }
+        }
+
+        @keyframes drawLine {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes growLine {
+            from {
+                transform: scaleY(0);
+            }
+
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+        @keyframes badgeSweep {
+            0% {
+                left: -100%;
+            }
+
+            55%,
+            100% {
+                left: 150%;
+            }
+        }
+
+        @keyframes dotPulse {
+
+            0%,
+            100% {
+                transform: scale(1.1);
+            }
+
+            50% {
+                transform: scale(.65);
+            }
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(24px, -18px) scale(1.12);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinAngle {
+            to {
+                --angle: 360deg;
+            }
+        }
+
+        @keyframes nodePulse {
+            0% {
+                transform: scale(1);
+                opacity: .65;
+            }
+
+            70%,
+            100% {
+                transform: scale(1.65);
+                opacity: 0;
+            }
+        }
+
+        /* ---------- Left panel ---------- */
+        .left-panel {
+            position: relative;
+            order: 1;
+            margin: 0 -24px 0 0;
+            padding: 1.9rem 1.8rem;
+            border-radius: 26px;
+            overflow: hidden;
+            color: #fff;
+            z-index: 2;
+            background:
+                radial-gradient(circle at 0% 10%,
+                    rgb(0, 14, 78) 0%,
+                    transparent 32%),
+                radial-gradient(circle at 90% 100%,
+                    rgba(169, 18, 18, 0.234) 0%,
+                    transparent 38%),
+                linear-gradient(135deg,
+                    var(--blue) 0%,
+                    var(--blue-deep) 52%,
+                    var(--blue-darker) 100%);
+            box-shadow: 0 28px 60px rgba(39, 72, 150, .28);
+            animation: slideInFromLeft 1s var(--ease) both;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(255, 255, 255, .13) 1px, transparent 1.5px);
+            background-size: 22px 22px;
+            -webkit-mask-image: linear-gradient(to bottom, #000, transparent 65%);
+            mask-image: linear-gradient(to bottom, #000, transparent 65%);
+        }
+
+
+
+        /* cursor spotlight */
+        .spotlight {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity .4s;
+            background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 30%), rgba(251, 251, 252, 0.059), transparent 60%);
+        }
+
+        .left-panel:hover .spotlight {
+            opacity: 1;
+        }
+
+        .badge,
+        .left-panel h1,
+        .subtext,
+        .stats-grid,
+        .how-we-help,
+        .footer-note {
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            width: fit-content;
+            padding: 7px 12px;
+            margin-bottom: 1.8rem;
+            font-size: .7rem;
+            font-weight: 500;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: #fff;
+            background: rgba(255, 255, 255, .09);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            overflow: hidden;
+            isolation: isolate;
+            backdrop-filter: blur(6px);
+        }
+
+        .badge::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: 8px;
+            background: linear-gradient(110deg, var(--red), #fff, var(--red));
+            background-size: 300% 100%;
+            animation: gradientFlow 5s linear infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        .badge::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .25), transparent);
+            animation: badgeSweep 3.5s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 10px rgba(233, 60, 71, .9);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        /* ---------- Headline ---------- */
+        .left-panel h1 {
+            font-size: clamp(2rem, 3.1vw, 2.5rem);
+            line-height: 1.18;
+            font-weight: 600;
+            letter-spacing: -1.4px;
+            max-width: 520px;
+            margin-bottom: 1.2rem;
+            animation: riseIn .9s var(--ease) .25s both;
+        }
+
+        .hl-grad {
+            background: linear-gradient(100deg, #fff 0%, #fffefe 50%, #fff 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtext {
+            max-width: 470px;
+            font-size: .86rem;
+            line-height: 1.75;
+            font-weight: 400;
+            color: rgb(255, 255, 255);
+            margin-bottom: 1.6rem;
+            animation: riseIn .9s var(--ease) .45s both;
+        }
+
+        /* ---------- Stats ---------- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            position: relative;
+            isolation: isolate;
+            padding: 0.6rem 1rem;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .14);
+            backdrop-filter: blur(4px);
+            animation: popIn .8s var(--ease) calc(.6s + var(--i) * .12s) backwards;
+            transition: transform .35s var(--ease), background .35s, box-shadow .35s;
+        }
+
+        .stat-item {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animated border */
+        .stat-item::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            padding: 2px;
+            border-radius: 14px;
+
+            background: conic-gradient(from var(--angle),
+                    transparent 0deg,
+                    transparent 220deg,
+                    var(--red) 300deg,
+                    #fff 330deg,
+                    transparent 360deg);
+
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+            opacity: 0;
+            pointer-events: none;
+
+            animation:
+                borderShow 10.4s linear infinite,
+                spinAngle 2.6s linear infinite;
+
+            z-index: 2;
+        }
+
+        /* One card after another */
+        .stat-item:nth-child(1)::before {
+            animation-delay: 0s, 0s;
+        }
+
+        .stat-item:nth-child(2)::before {
+            animation-delay: 2.6s, 0s;
+        }
+
+        .stat-item:nth-child(3)::before {
+            animation-delay: 5.2s, 0s;
+        }
+
+        .stat-item:nth-child(4)::before {
+            animation-delay: 7.8s, 0s;
+        }
+
+
+        /* Controls when the border appears */
+        @keyframes borderShow {
+
+            0%,
+            24% {
+                opacity: 1;
+            }
+
+            25%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+
+        /* Rotating border */
+        @property --angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @keyframes spinAngle {
+            to {
+                --angle: 360deg;
+            }
+        }
+
+        .stat-icon {
+            position: absolute;
+            top: .95rem;
+            right: 1rem;
+            font-size: .95rem;
+            color: rgba(255, 255, 255, .32);
+            transition: color .3s, transform .4s var(--ease);
+        }
+
+        .stat-item:hover .stat-icon {
+            color: #ff8c94;
+            transform: scale(1.25);
+        }
+
+        .stat-item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -.03em;
+            margin-bottom: .3rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-item p {
+            font-size: .7rem;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, .72);
+        }
+
+        /* ---------- How we help: timeline ---------- */
+        .how-we-help h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1.2rem;
+        }
+
+        .how-we-help h4::before {
+            content: "";
+            width: 22px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--red);
+        }
+
+        .help-list {
+            position: relative;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.15rem;
+        }
+
+        .help-list::before {
+            content: "";
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            bottom: 18px;
+            width: 2px;
+            border-radius: 2px;
+            background: linear-gradient(to bottom, var(--red), rgba(255, 255, 255, .18));
+            transform-origin: top;
+            animation: growLine 1.5s var(--ease) .9s backwards;
+        }
+
+        .help-list li {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            animation: itemIn .8s var(--ease) calc(.9s + var(--i) * .13s) backwards;
+        }
+
+        .node {
+            position: relative;
+            flex: 0 0 auto;
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            font-size: 1rem;
+            color: #fff;
+            background: linear-gradient(rgba(255, 255, 255, .14), rgba(255, 255, 255, .14)), var(--blue-deep);
+            border: 1.5px solid rgba(255, 255, 255, .3);
+            transition: background .3s, border-color .3s, transform .35s var(--ease), box-shadow .3s;
+        }
+
+        .node::after {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(233, 60, 71, .8);
+            animation: nodePulse 3s ease-out infinite;
+            animation-delay: calc(var(--i) * .55s);
+            pointer-events: none;
+        }
+
+        .help-list li:hover .node {
+            background: var(--red);
+            border-color: var(--red);
+            transform: scale(1.1);
+            box-shadow: 0 8px 18px rgba(233, 60, 71, .45);
+        }
+
+        .help-text {
+            flex: 1;
+            padding-top: 1px;
+            transition: transform .35s var(--ease);
+        }
+
+        .help-list li:hover .help-text {
+            transform: translateX(4px);
+        }
+
+        .help-text strong {
+            display: block;
+            font-size: .82rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .help-text span {
+            display: block;
+            font-size: .74rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, .75);
+        }
+
+        .footer-note {
+            display: none;
+        }
+
+        /* ---------- Right panel ---------- */
+        .right-panel {
+            order: 2;
+            padding: 2.6rem 3.2rem 2.2rem 4.8rem;
+            border-radius: 26px;
+            background: #fff;
+            box-shadow: 0 24px 60px rgba(18, 31, 58, .10);
+            display: flex;
+            flex-direction: column;
+            animation: slideInFromRight .9s var(--ease) both;
+        }
+
+        .form-header {
+            margin-bottom: 1.9rem;
+            max-width: 620px;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -.06rem;
+            color: var(--ink);
+        }
+
+        .form-header h2::before {
+            content: "";
+            display: block;
+            width: 46px;
+            height: 4px;
+            border-radius: 4px;
+            margin-bottom: 1.1rem;
+            background: var(--red);
+        }
+
+        .form-header .eyebrow {
+            font-size: .82rem;
+            font-weight: 400;
+            line-height: 1.65;
+            color: var(--muted);
+            margin-top: .6rem;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto auto auto 1fr auto;
+            gap: 1.75rem 1.1rem;
+            flex: 1;
+        }
+
+        form>.form-group:has(textarea) textarea {
+            flex: 1;
+        }
+
+        .form-row {
+            display: contents;
+        }
+
+        form>.form-group,
+        .submit-btn,
+        .form-group:has(#state),
+        .form-group:has(#college) {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: .45rem;
+            min-width: 0;
+        }
+
+        label {
+            font-size: .9rem;
+            font-weight: 400;
+            color: #000;
+        }
+
+        .req {
+            color: var(--red);
+            font-weight: 600;
+            margin-left: 3px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: .82rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: .82rem;
+            font-weight: 400;
+            color: var(--ink);
+            background: #fbfcfe;
+            border: 1.5px solid var(--line);
+            border-radius: 12px;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s, background .2s, transform .2s;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #98a2b3;
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border-color: rgba(39, 72, 150, .42);
+            background: #fff;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--blue);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(39, 72, 150, .10);
+        }
+
+        option {
+            color: var(--ink);
+            background: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 96px;
+        }
+
+        .select-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .select-wrapper select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding-right: 2.6rem;
+            cursor: pointer;
+        }
+
+        .select-wrapper select:invalid {
+            color: #98a2b3;
+        }
+
+        .select-wrapper svg {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            width: 12px;
+            height: 12px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            fill: none;
+            stroke: var(--blue);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform .25s var(--ease);
+        }
+
+        .select-wrapper:focus-within svg {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        /* ---------- Phone field with country dropdown ---------- */
+        .phone-field {
+            position: relative;
+            display: flex;
+            align-items: stretch;
+            background: #fbfcfe;
+            border: 1.5px solid var(--line);
+            border-radius: 12px;
+            transition: border-color .2s, box-shadow .2s, background .2s;
+        }
+
+        .phone-field:hover {
+            border-color: rgba(39, 72, 150, .42);
+            background: #fff;
+        }
+
+        .phone-field:focus-within,
+        .phone-field.open {
+            border-color: var(--blue);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(39, 72, 150, .10);
+        }
+
+        .phone-field input,
+        .phone-field input:hover,
+        .phone-field input:focus {
+            flex: 1;
+            min-width: 0;
+            border: 0;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .cc-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            flex: 0 0 auto;
+            padding: 0 .65rem 0 .8rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: .82rem;
+            color: var(--ink);
+            background: transparent;
+            border: 0;
+            border-right: 1.5px solid var(--line);
+            border-radius: 11px 0 0 11px;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .cc-btn:hover {
+            background: rgba(39, 72, 150, .05);
+        }
+
+        .cc-btn:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: -2px;
+        }
+
+        .flag {
+            width: 22px;
+            height: 16px;
+            flex: 0 0 auto;
+            object-fit: cover;
+            border-radius: 3px;
+            box-shadow: 0 0 0 1px rgba(23, 38, 76, .12);
+            background: #eef1f6;
+        }
+
+        .cc-btn .dial {
+            font-weight: 500;
+        }
+
+        .cc-btn svg {
+            width: 10px;
+            height: 10px;
+            fill: none;
+            stroke: var(--blue);
+            stroke-width: 2.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform .25s var(--ease);
+        }
+
+        .phone-field.open .cc-btn svg {
+            transform: rotate(180deg);
+        }
+
+        .cc-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: 310px;
+            max-width: calc(100vw - 2.5rem);
+            z-index: 50;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            box-shadow: 0 24px 50px rgba(18, 31, 58, .18);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity .2s, transform .25s var(--ease), visibility 0s .25s;
+        }
+
+        .phone-field.open .cc-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            transition: opacity .2s, transform .25s var(--ease), visibility 0s;
+        }
+
+        .cc-search {
+            position: relative;
+            padding: .6rem;
+        }
+
+        .cc-search i {
+            position: absolute;
+            left: 1.35rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: .75rem;
+            color: #98a2b3;
+            pointer-events: none;
+        }
+
+        .cc-search input {
+            padding: .6rem .8rem .6rem 2.2rem;
+            font-size: .78rem;
+            border-radius: 10px;
+        }
+
+        .cc-list {
+            list-style: none;
+            max-height: 240px;
+            overflow-y: auto;
+            padding: 0 .4rem .45rem;
+            overscroll-behavior: contain;
+        }
+
+        .cc-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .cc-list::-webkit-scrollbar-thumb {
+            background: #d3d9e6;
+            border-radius: 6px;
+        }
+
+        .cc-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: .5rem .6rem;
+            font-size: .8rem;
+            color: var(--ink);
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .cc-list li.pinned {
+            margin-bottom: 4px;
+            border-radius: 9px 9px 0 0;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: .6rem;
+        }
+
+        .cc-list li .name {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .cc-list li .code {
+            font-size: .75rem;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cc-list li.active {
+            background: rgba(39, 72, 150, .07);
+        }
+
+        .cc-list li[aria-selected="true"] {
+            background: rgba(39, 72, 150, .11);
+            font-weight: 500;
+        }
+
+        .cc-list li.empty {
+            justify-content: center;
+            color: var(--muted);
+            cursor: default;
+            background: none;
+        }
+
+        /* ---------- Submit ---------- */
+        .submit-btn {
+            margin-top: .4rem;
+            padding: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+            box-shadow: 0 12px 26px rgba(233, 60, 71, .28);
+            transition: transform .25s var(--ease), box-shadow .25s;
+        }
+
+        .submit-btn::after {
+            content: "→";
+            display: inline-block;
+            margin-left: 10px;
+            transition: transform .25s var(--ease);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 34px rgba(233, 60, 71, .40);
+        }
+
+        .submit-btn:hover::after {
+            transform: translateX(5px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:focus-visible {
+            outline: 3px solid rgba(39, 72, 150, .55);
+            outline-offset: 3px;
+        }
+
+        .form-footer-note {
+            font-size: .66rem;
+            line-height: 1.6;
+            text-align: center;
+            color: #7a8496;
+            margin-top: 1.2rem;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 1050px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-panel {
+                margin: 0 0 -24px 0;
+                padding: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .right-panel {
+                padding: 3.6rem 2.5rem 2.4rem;
+            }
+
+            form {
+                grid-template-rows: none;
+                flex: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .left-panel .subtext,
+            .left-panel .stats-grid,
+            .left-panel .how-we-help,
+            .left-panel .footer-note {
+                display: none;
+            }
+
+            .left-panel h1 {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+                align-items: flex-start;
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .left-panel {
+                margin: 0;
+                padding: 2rem 1.5rem 2.6rem;
+                border-radius: 0 0 26px 26px;
+                animation: none;
+            }
+
+            .left-panel h1 {
+                font-size: 2rem;
+                animation: none;
+            }
+
+            .badge {
+                margin-bottom: 1.2rem;
+            }
+
+            .right-panel {
+                padding: 2.2rem 1.25rem 2rem;
+                border-radius: 0;
+                box-shadow: none;
+                animation: none;
+            }
+
+            .form-header h2 {
+                font-size: 1.5rem;
+            }
+
+            form {
+                grid-template-columns: 1fr;
+                grid-template-rows: none;
+                flex: none;
+            }
+
+            .cc-menu {
+                width: min(310px, calc(100vw - 2.5rem));
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .hl-under::after {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- LEFT PANEL -->
+        <div class="left-panel" id="leftPanel">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Admissions ongoing
+            </div>
+
+            <h1>
+                <span class="hl-grad">Colleges Across</span>
+                India &amp; Abroad.
+                <span class="hl-grad">One Right Choice</span>
+                for You.
+            </h1>
+
+            <p class="subtext">
+                Choosing the right college can be overwhelming. Learntech Edu Solutions helps students and parents
+                explore suitable courses and colleges across Karnataka, India and abroad, compare options and get
+                personalized admission guidance at no cost.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-item" style="--i:0">
+                    <i class="fa-solid fa-user-graduate stat-icon"></i>
+                    <h3><span class="count" data-target="100000" data-format="in" data-suffix="+">1,00,000+</span></h3>
+                    <p>Students guided</p>
+                </div>
+                <div class="stat-item" style="--i:1">
+                    <i class="fa-solid fa-building-columns stat-icon"></i>
+                    <h3><span class="count" data-target="1000" data-format="in" data-suffix="+">1,000+</span></h3>
+                    <p>Partner colleges &amp; universities</p>
+                </div>
+                <div class="stat-item" style="--i:2">
+                    <i class="fa-solid fa-medal stat-icon"></i>
+                    <h3><span class="count" data-target="30" data-suffix="+ years">30+ years</span></h3>
+                    <p>Experience</p>
+                </div>
+                <div class="stat-item" style="--i:3">
+                    <i class="fa-solid fa-calendar-check stat-icon"></i>
+                    <h3><span class="count" data-target="1994" data-from="1900" data-prefix="Since ">Since 1994</span>
+                    </h3>
+                    <p>In Education</p>
+                </div>
+            </div>
+
+            <div class="how-we-help">
+                <h4>How We Help</h4>
+                <ul class="help-list">
+                    <li style="--i:0">
+                        <span class="node"><i class="fa-regular fa-user"></i></span>
+                        <div class="help-text">
+                            <strong>Personalized Career Counselling</strong>
+                            <span>Understand your options based on your goals, academic background and interests, with
+                                guidance from experienced counsellors.</span>
+                        </div>
+                    </li>
+                    <li style="--i:1">
+                        <span class="node"><i class="fa-regular fa-pen-to-square"></i></span>
+                        <div class="help-text">
+                            <strong>Entrance Exam Mentoring</strong>
+                            <span>Get guidance and mentoring to help you understand and prepare for relevant entrance
+                                examinations.</span>
+                        </div>
+                    </li>
+                    <li style="--i:2">
+                        <span class="node"><i class="fa-regular fa-file-lines"></i></span>
+                        <div class="help-text">
+                            <strong>Admission &amp; Seat Reservation Support</strong>
+                            <span>Get assistance with the admission process, seat reservation facilities and other
+                                important admission formalities.</span>
+                        </div>
+                    </li>
+                    <li style="--i:3">
+                        <span class="node"><i class="fa-regular fa-money-bill-1"></i></span>
+                        <div class="help-text">
+                            <strong>Educational Loans &amp; Scholarships</strong>
+                            <span>Explore available options for educational loans and scholarships to help plan your
+                                education finances.</span>
+                        </div>
+                    </li>
+                    <li style="--i:4">
+                        <span class="node"><i class="fa-regular fa-building"></i></span>
+                        <div class="help-text">
+                            <strong>Direct Access to Institutions</strong>
+                            <span>Facilitate direct meetings with colleges and universities, so you can clarify
+                                important questions before making your decision.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-note">
+                Your details go only to our counselling team — never sold or shared. One counsellor, one call, no spam.
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="right-panel">
+            <div class="form-header">
+                <h2>Find the Right Course &amp; College</h2>
+                <p class="eyebrow">Tell us what you're looking for and our admission counsellor will help you
+                    explore suitable options.</p>
+            </div>
+
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="fullname">Full Name <span class="req">*</span></label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name"
+                        autocomplete="name" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="mobile">Mobile / WhatsApp <span class="req">*</span></label>
+                        <div class="phone-field" id="phoneField">
+                            <button type="button" class="cc-btn" id="ccBtn" aria-haspopup="listbox"
+                                aria-expanded="false" aria-controls="ccList" aria-label="Country code: India +91">
+                                <img class="flag" id="ccFlag" src="https://flagcdn.com/w40/in.png"
+                                    srcset="https://flagcdn.com/w80/in.png 2x" width="22" height="16" alt="">
+                                <span class="dial" id="ccDial">+91</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <input type="tel" id="mobile" name="mobile" placeholder="Mobile number"
+                                autocomplete="tel-national" inputmode="tel" required>
+                            <input type="hidden" id="countryCode" name="country_code" value="+91">
+
+                            <div class="cc-menu" id="ccMenu">
+                                <div class="cc-search">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" id="ccSearch" placeholder="Search country or code"
+                                        autocomplete="off" aria-label="Search country" role="combobox"
+                                        aria-expanded="true" aria-controls="ccList">
+                                </div>
+                                <ul class="cc-list" id="ccList" role="listbox" aria-label="Countries"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="req">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address"
+                            autocomplete="email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="degree">What course are you looking for? <span class="req">*</span></label>
+                    <input type="text" id="degree" name="course" placeholder="e.g. B.Tech, MBA, B.Sc Nursing" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state">Your State <span class="req">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="state" name="state" required>
+                                <option value="" disabled selected hidden>Select your state</option>
+                                <option value="andhra-pradesh">Andhra Pradesh</option>
+                                <option value="arunachal-pradesh">Arunachal Pradesh</option>
+                                <option value="Andaman and Nicoba">Andaman and Nicobar</option>
+                                <option value="assam">Assam</option>
+                                <option value="bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="chhattisgarh">Chhattisgarh</option>
+                                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                <option value="Daman and Diu">Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="goa">Goa</option>
+                                <option value="gujarat">Gujarat</option>
+                                <option value="haryana">Haryana</option>
+                                <option value="himachal-pradesh">Himachal Pradesh</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                <option value="jharkhand">Jharkhand</option>
+                                <option value="karnataka">Karnataka</option>
+                                <option value="kerala">Kerala</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="madhya-pradesh">Madhya Pradesh</option>
+                                <option value="maharashtra">Maharashtra</option>
+                                <option value="manipur">Manipur</option>
+                                <option value="meghalaya">Meghalaya</option>
+                                <option value="mizoram">Mizoram</option>
+                                <option value="nagaland">Nagaland</option>
+                                <option value="odisha">Odisha</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="punjab">Punjab</option>
+                                <option value="rajasthan">Rajasthan</option>
+                                <option value="sikkim">Sikkim</option>
+                                <option value="tamil-nadu">Tamil Nadu</option>
+                                <option value="tripura">Tripura</option>
+                                <option value="telangana">Telangana</option>
+                                <option value="uttarakhand">Uttarakhand</option>
+                                <option value="uttar-pradesh">Uttar Pradesh</option>
+                                <option value="west-bengal">West Bengal</option>
+                            </select>
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="college">Preferred College (Optional)</label>
+                        <input type="text" id="college" name="college" placeholder="e.g. Christ University">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message (Optional)</label>
+                    <textarea id="message" name="message"
+                        placeholder="Tell us what you need help with — course, college, fees, eligibility, admission or counselling."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+
+            <div class="form-footer-note">
+                By clicking submit, I agree to the terms &amp; conditions and privacy policy and give my consent to
+                receive updates through SMS/Email.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            /* ---------- Country dropdown ---------- */
+            var DATA = [
+                ['AF', 'Afghanistan', '93'], ['DZ', 'Algeria', '213'], ['AR', 'Argentina', '54'], ['AM', 'Armenia', '374'],
+                ['AU', 'Australia', '61'], ['AT', 'Austria', '43'], ['AZ', 'Azerbaijan', '994'], ['BH', 'Bahrain', '973'],
+                ['BD', 'Bangladesh', '880'], ['BE', 'Belgium', '32'], ['BT', 'Bhutan', '975'], ['BW', 'Botswana', '267'],
+                ['BR', 'Brazil', '55'], ['BG', 'Bulgaria', '359'], ['KH', 'Cambodia', '855'], ['CA', 'Canada', '1'],
+                ['CL', 'Chile', '56'], ['CN', 'China', '86'], ['CO', 'Colombia', '57'], ['HR', 'Croatia', '385'],
+                ['CY', 'Cyprus', '357'], ['CZ', 'Czech Republic', '420'], ['DK', 'Denmark', '45'], ['EG', 'Egypt', '20'],
+                ['EE', 'Estonia', '372'], ['ET', 'Ethiopia', '251'], ['FJ', 'Fiji', '679'], ['FI', 'Finland', '358'],
+                ['FR', 'France', '33'], ['GE', 'Georgia', '995'], ['DE', 'Germany', '49'], ['GH', 'Ghana', '233'],
+                ['GR', 'Greece', '30'], ['HK', 'Hong Kong', '852'], ['HU', 'Hungary', '36'], ['IS', 'Iceland', '354'],
+                ['IN', 'India', '91'], ['ID', 'Indonesia', '62'], ['IR', 'Iran', '98'], ['IQ', 'Iraq', '964'],
+                ['IE', 'Ireland', '353'], ['IL', 'Israel', '972'], ['IT', 'Italy', '39'], ['JP', 'Japan', '81'],
+                ['JO', 'Jordan', '962'], ['KZ', 'Kazakhstan', '7'], ['KE', 'Kenya', '254'], ['KW', 'Kuwait', '965'],
+                ['KG', 'Kyrgyzstan', '996'], ['LA', 'Laos', '856'], ['LV', 'Latvia', '371'], ['LB', 'Lebanon', '961'],
+                ['LT', 'Lithuania', '370'], ['LU', 'Luxembourg', '352'], ['MY', 'Malaysia', '60'], ['MV', 'Maldives', '960'],
+                ['MT', 'Malta', '356'], ['MU', 'Mauritius', '230'], ['MX', 'Mexico', '52'], ['MN', 'Mongolia', '976'],
+                ['MA', 'Morocco', '212'], ['MZ', 'Mozambique', '258'], ['MM', 'Myanmar', '95'], ['NA', 'Namibia', '264'],
+                ['NP', 'Nepal', '977'], ['NL', 'Netherlands', '31'], ['NZ', 'New Zealand', '64'], ['NG', 'Nigeria', '234'],
+                ['NO', 'Norway', '47'], ['OM', 'Oman', '968'], ['PK', 'Pakistan', '92'], ['PE', 'Peru', '51'],
+                ['PH', 'Philippines', '63'], ['PL', 'Poland', '48'], ['PT', 'Portugal', '351'], ['QA', 'Qatar', '974'],
+                ['RO', 'Romania', '40'], ['RU', 'Russia', '7'], ['RW', 'Rwanda', '250'], ['SA', 'Saudi Arabia', '966'],
+                ['RS', 'Serbia', '381'], ['SG', 'Singapore', '65'], ['SK', 'Slovakia', '421'], ['SI', 'Slovenia', '386'],
+                ['ZA', 'South Africa', '27'], ['KR', 'South Korea', '82'], ['ES', 'Spain', '34'], ['LK', 'Sri Lanka', '94'],
+                ['SE', 'Sweden', '46'], ['CH', 'Switzerland', '41'], ['TW', 'Taiwan', '886'], ['TZ', 'Tanzania', '255'],
+                ['TH', 'Thailand', '66'], ['TN', 'Tunisia', '216'], ['TR', 'Turkey', '90'], ['UG', 'Uganda', '256'],
+                ['UA', 'Ukraine', '380'], ['AE', 'United Arab Emirates', '971'], ['GB', 'United Kingdom', '44'],
+                ['US', 'United States', '1'], ['UZ', 'Uzbekistan', '998'], ['VN', 'Vietnam', '84'], ['YE', 'Yemen', '967'],
+                ['ZM', 'Zambia', '260'], ['ZW', 'Zimbabwe', '263']
+            ].map(function (c) { return { iso: c[0], name: c[1], dial: c[2] }; });
+
+            var india = DATA.filter(function (c) { return c.iso === 'IN'; })[0];
+            var COUNTRIES = [india].concat(
+                DATA.filter(function (c) { return c.iso !== 'IN'; })
+                    .sort(function (a, b) { return a.name.localeCompare(b.name); })
+            );
+
+            var wrap = document.getElementById('phoneField');
+            var btn = document.getElementById('ccBtn');
+            var flagEl = document.getElementById('ccFlag');
+            var dialEl = document.getElementById('ccDial');
+            var search = document.getElementById('ccSearch');
+            var ul = document.getElementById('ccList');
+            var phone = document.getElementById('mobile');
+            var hidden = document.getElementById('countryCode');
+
+            var current = india;
+            var filtered = COUNTRIES.slice();
+            var activeIdx = 0;
+
+            function flagUrl(iso, w) { return 'https://flagcdn.com/w' + w + '/' + iso.toLowerCase() + '.png'; }
+
+            function render(q) {
+                var s = (q || '').trim().toLowerCase().replace(/^\+/, '');
+                filtered = COUNTRIES.filter(function (c) {
+                    return !s || c.name.toLowerCase().indexOf(s) > -1 || c.dial.indexOf(s) === 0 || c.iso.toLowerCase() === s;
+                });
+                ul.innerHTML = '';
+                if (!filtered.length) {
+                    var empty = document.createElement('li');
+                    empty.className = 'empty';
+                    empty.textContent = 'No country found';
+                    ul.appendChild(empty);
+                    activeIdx = -1;
+                    return;
+                }
+                filtered.forEach(function (c, i) {
+                    var li = document.createElement('li');
+                    li.setAttribute('role', 'option');
+                    li.id = 'cc-' + c.iso;
+                    li.dataset.iso = c.iso;
+                    li.setAttribute('aria-selected', c.iso === current.iso ? 'true' : 'false');
+                    if (c.iso === 'IN' && !s) li.className = 'pinned';
+                    li.innerHTML =
+                        '<img class="flag" src="' + flagUrl(c.iso, 40) + '" srcset="' + flagUrl(c.iso, 80) + ' 2x" width="22" height="16" alt="" loading="lazy">' +
+                        '<span class="name">' + c.name + '</span><span class="code">+' + c.dial + '</span>';
+                    ul.appendChild(li);
+                });
+                var cur = filtered.findIndex(function (c) { return c.iso === current.iso; });
+                setActive(cur > -1 ? cur : 0, true);
+            }
+
+            function setActive(i, scroll) {
+                var items = ul.querySelectorAll('li[data-iso]');
+                if (!items.length) return;
+                i = Math.max(0, Math.min(i, items.length - 1));
+                var prev = ul.querySelector('li.active');
+                if (prev) prev.classList.remove('active');
+                items[i].classList.add('active');
+                activeIdx = i;
+                search.setAttribute('aria-activedescendant', items[i].id);
+                if (scroll) items[i].scrollIntoView({ block: 'nearest' });
+            }
+
+            function open() {
+                wrap.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+                search.value = '';
+                render('');
+                if (window.matchMedia('(pointer: fine)').matches) {
+                    requestAnimationFrame(function () { search.focus({ preventScroll: true }); });
+                }
+            }
+
+            function close(refocus) {
+                wrap.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+                if (refocus) btn.focus();
+            }
+
+            function select(iso) {
+                current = COUNTRIES.filter(function (c) { return c.iso === iso; })[0] || india;
+                flagEl.src = flagUrl(current.iso, 40);
+                flagEl.srcset = flagUrl(current.iso, 80) + ' 2x';
+                dialEl.textContent = '+' + current.dial;
+                hidden.value = '+' + current.dial;
+                btn.setAttribute('aria-label', 'Country code: ' + current.name + ' +' + current.dial);
+                close(false);
+                phone.focus();
+            }
+
+            btn.addEventListener('click', function () {
+                wrap.classList.contains('open') ? close(false) : open();
+            });
+
+            btn.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowDown') { e.preventDefault(); if (!wrap.classList.contains('open')) open(); }
+            });
+
+            search.addEventListener('input', function () { render(search.value); });
+
+            search.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1, true); }
+                else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1, true); }
+                else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (activeIdx > -1 && filtered[activeIdx]) select(filtered[activeIdx].iso);
+                }
+                else if (e.key === 'Escape') { e.preventDefault(); close(true); }
+                else if (e.key === 'Tab') { close(false); }
+            });
+
+            ul.addEventListener('click', function (e) {
+                var li = e.target.closest('li[data-iso]');
+                if (li) select(li.dataset.iso);
+            });
+
+            ul.addEventListener('mousemove', function (e) {
+                var li = e.target.closest('li[data-iso]');
+                if (!li || li.classList.contains('active')) return;
+                var items = Array.prototype.slice.call(ul.querySelectorAll('li[data-iso]'));
+                setActive(items.indexOf(li), false);
+            });
+
+            document.addEventListener('pointerdown', function (e) {
+                if (!wrap.contains(e.target)) close(false);
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && wrap.classList.contains('open')) close(true);
+            });
+
+            phone.addEventListener('input', function () {
+                phone.value = phone.value.replace(/[^\d\s\-]/g, '');
+            });
+
+            /* ---------- Stats count-up ---------- */
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!reduce) {
+                document.querySelectorAll('.count').forEach(function (el) {
+                    var target = +el.dataset.target;
+                    var from = +(el.dataset.from || 0);
+                    var pre = el.dataset.prefix || '';
+                    var suf = el.dataset.suffix || '';
+                    var fmt = function (n) { return el.dataset.format === 'in' ? n.toLocaleString('en-IN') : String(n); };
+                    el.textContent = pre + fmt(from) + suf;
+                    setTimeout(function () {
+                        var t0 = performance.now(), dur = 1900;
+                        (function tick(t) {
+                            var p = Math.min((t - t0) / dur, 1);
+                            var e = 1 - Math.pow(1 - p, 4);
+                            el.textContent = pre + fmt(Math.round(from + (target - from) * e)) + suf;
+                            if (p < 1) requestAnimationFrame(tick);
+                        })(t0);
+                    }, 750);
+                });
+            }
+
+            /* ---------- Cursor spotlight ---------- */
+            var panel = document.getElementById('leftPanel');
+            panel.addEventListener('pointermove', function (e) {
+                var r = panel.getBoundingClientRect();
+                panel.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                panel.style.setProperty('--my', (e.clientY - r.top) + 'px');
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
