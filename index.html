@@ -703,8 +703,9 @@
         input:hover,
         select:hover,
         textarea:hover {
-            border-color: rgba(39, 72, 150, .42);
+            border-color: var(--blue);
             background: #fff;
+            box-shadow: 0 1px 0 1px rgba(0, 23, 49, 0.986);
         }
 
         input:focus,
@@ -774,15 +775,16 @@
         }
 
         .phone-field:hover {
-            border-color: rgba(39, 72, 150, .42);
+            border-color: var(--blue);
             background: #fff;
+            box-shadow: 0 1px 0 1px rgba(0, 23, 49, 0.986);
         }
 
         .phone-field:focus-within,
         .phone-field.open {
             border-color: var(--blue);
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(39, 72, 150, .10);
+            box-shadow: 0 1px 0 1px rgba(0, 23, 49, 0.986);
         }
 
         .phone-field input,
@@ -1077,7 +1079,7 @@
 
             .badge {
                 margin-bottom: 1.2rem;
-            }   
+            }
 
             .right-panel {
                 padding: 2.2rem 1.25rem 2rem;
